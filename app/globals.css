@@ -1,26 +1,151 @@
 @import "tailwindcss";
 
+/* ==========================
+   Theme
+========================== */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8f8f6;
+  --foreground: #1f2937;
+
+  --primary: #0b3d2e;
+  --secondary: #c8a96a;
+
+  --muted: #6b7280;
+
+  --border: #e5e7eb;
+
+  --section-padding: 100px;
 }
+
+/* ==========================
+   Tailwind Theme
+========================== */
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ==========================
+   Base
+========================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+
+  font-family: var(--font-thai), sans-serif;
+
+  margin: 0;
+  padding: 0;
+
+  overflow-x: hidden;
+}
+
+/* ==========================
+   Typography
+========================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+p {
+  color: #4b5563;
+  line-height: 1.8;
+}
+
+/* ==========================
+   Link
+========================== */
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ==========================
+   Image
+========================== */
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ==========================
+   Selection
+========================== */
+
+::selection {
+  background: #0b3d2e;
+  color: white;
+}
+
+/* ==========================
+   Scrollbar
+========================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0b3d2e;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-track {
+  background: #ececec;
+}
+
+/* ==========================
+   Section
+========================== */
+
+section {
+  padding: var(--section-padding) 0;
+}
+
+/* ==========================
+   Animation
+========================== */
+
+.fade-up {
+  animation: fadeUp .8s ease both;
+}
+
+@keyframes fadeUp {
+
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
 }

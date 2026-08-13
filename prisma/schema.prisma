@@ -1,0 +1,351 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// =====================================================
+// USER
+// =====================================================
+
+model User {
+  id String @id @default(cuid())
+
+  name     String
+  email    String @unique
+  password String
+
+  emailVerified DateTime?
+
+  role String @default("USER")
+
+  image String?
+
+  phone       String?
+  address     String?
+  district    String?
+  subDistrict String?
+  province    String?
+  postalCode  String?
+
+  accounts Account[]
+  sessions Session[]
+
+  addresses Address[]
+
+  cart Cart?
+
+  orders Order[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// =====================================================
+// NEXT AUTH ACCOUNT
+// =====================================================
+
+model Account {
+  id                String @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+
+  refresh_token String?
+  access_token  String?
+  expires_at    Int?
+  token_type    String?
+  scope         String?
+  id_token      String?
+  session_state String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+// =====================================================
+// NEXT AUTH SESSION
+// =====================================================
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// =====================================================
+// VERIFICATION TOKEN
+// =====================================================
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// =====================================================
+// ADDRESS
+// =====================================================
+
+model Address {
+  id String @id @default(cuid())
+
+  userId String
+
+  fullName String
+  phone    String
+
+  address String
+
+  subDistrict String
+  district    String
+  province    String
+  postalCode  String
+
+  note String?
+
+  isDefault Boolean @default(false)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  orders Order[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// =====================================================
+// CATEGORY
+// =====================================================
+
+model Category {
+  id          String  @id @default(cuid())
+  name        String
+  slug        String  @unique
+  description String?
+  image       String?
+
+  isActive  Boolean @default(true)
+  sortOrder Int     @default(0)
+
+  parentId String?
+
+  parent   Category?  @relation("CategoryTree", fields: [parentId], references: [id])
+  children Category[] @relation("CategoryTree")
+
+  products Product[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// =====================================================
+// PRODUCT
+// =====================================================
+
+model Product {
+  id String @id @default(cuid())
+
+  name        String
+  sku         String @unique
+  slug        String @unique
+  description String
+
+  price    Float
+  stock    Int     @default(0)
+  isActive Boolean @default(true)
+
+  categoryId String
+
+  category Category @relation(fields: [categoryId], references: [id])
+
+  images ProductImage[]
+
+  cartItems CartItem[]
+
+  orderItems OrderItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// =====================================================
+// PRODUCT IMAGE
+// =====================================================
+
+model ProductImage {
+  id String @id @default(cuid())
+
+  imageUrl String
+
+  sortOrder Int @default(0)
+
+  productId String
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+}
+
+// =====================================================
+// CART
+// =====================================================
+
+model Cart {
+  id String @id @default(cuid())
+
+  userId String @unique
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  items CartItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// =====================================================
+// CART ITEM
+// =====================================================
+
+model CartItem {
+  id String @id @default(cuid())
+
+  cartId    String
+  productId String
+
+  quantity Int @default(1)
+
+  cart Cart @relation(fields: [cartId], references: [id], onDelete: Cascade)
+
+  product Product @relation(fields: [productId], references: [id])
+
+  @@unique([cartId, productId])
+}
+
+// =====================================================
+// ORDER STATUS
+// =====================================================
+
+enum OrderStatus {
+  PENDING
+  PAID
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+// =====================================================
+// SHIPPING CARRIER
+// =====================================================
+
+enum Carrier {
+  KERRY
+  THAILAND_POST
+  FLASH
+}
+
+// =====================================================
+// ORDER
+// =====================================================
+
+model Order {
+  id String @id @default(cuid())
+
+  userId String
+
+  user User @relation(fields: [userId], references: [id])
+
+  addressId String
+
+  address Address @relation(fields: [addressId], references: [id])
+
+  slipUrl String?
+
+  total Float
+
+  status OrderStatus @default(PENDING)
+
+  // เลขติดตามพัสดุ และบริษัทขนส่ง (กรอกตอนเปลี่ยนสถานะเป็น SHIPPED)
+  trackingNumber String?
+  carrier        Carrier?
+
+  items OrderItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// =====================================================
+// ORDER ITEM
+// =====================================================
+
+model OrderItem {
+  id String @id @default(cuid())
+
+  orderId String
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  productId String
+
+  product Product @relation(fields: [productId], references: [id])
+
+  quantity Int
+
+  price Float
+
+  createdAt DateTime @default(now())
+}
+
+model PageVisit {
+  id String @id @default(cuid())
+
+  path      String?
+  visitorId String?
+
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([visitorId])
+}
+
+// =====================================================
+// EmailVerificationToke
+// =====================================================
+
+model EmailVerificationToken {
+  id String @id @default(cuid())
+
+  email String
+
+  token String @unique
+
+  expires DateTime
+
+  createdAt DateTime @default(now())
+}
+
+
+model PasswordResetToken {
+  id String @id @default(cuid())
+
+  email String
+
+  token String @unique
+
+  expires DateTime
+
+  createdAt DateTime @default(now())
+}
