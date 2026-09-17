@@ -8,7 +8,7 @@ export default async function AdminNavbar() {
   return (
     <header className="sticky top-0 z-50 flex h-16 items-center justify-between border-b border-gray-200 bg-white px-6 shadow-sm">
       <Link href="/admin/dashboard">
-        <h1 className="text-xl font-bold text-[#0B3D2E]">B-Long Admin</h1>
+        <h1 className="text-xl font-bold text-[#0B3D2E]">B-NINE Admin</h1>
       </Link>
 
       <div className="flex items-center gap-6">

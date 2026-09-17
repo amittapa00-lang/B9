@@ -41,10 +41,10 @@ const paymentMethods = [ "โอนผ่านธนาคาร", "เลข�
 const shippingMethods = ["Kerry Express", "ไปรษณีย์ไทย", "Flash Express"];
 
 const socialLinks = [
-  { label: "Facebook", href: "https://facebook.com", icon: FacebookIcon },
-  { label: "Instagram", href: "https://instagram.com", icon: InstagramIcon },
-  { label: "อีเมล", href: "mailto:hello@example.com", icon: Mail },
-  { label: "LINE", href: "https://line.me", icon: MessageCircle },
+  { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61560984729693&locale=th_TH", icon: FacebookIcon },
+  { label: "Instagram", href: "https://www.instagram.com/b.nine9trading/", icon: InstagramIcon },
+  { label: "อีเมล", href: "mailto:b.nine9trading@gmail.com", icon: Mail },
+  { label: "LINE", href: "https://lin.ee/ufaoDYo", icon: MessageCircle },
 ];
 
 const socialLinkClass =
@@ -112,6 +112,8 @@ export default function Footer() {
                     href={s.href}
                     aria-label={s.label}
                     title={s.label}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className={socialLinkClass}
                   >
                     <s.icon className="h-4 w-4" strokeWidth={1.75} />

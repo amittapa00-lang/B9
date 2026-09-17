@@ -44,35 +44,35 @@ const contactMethods = [
   {
     icon: Mail,
     label: "อีเมล",
-    value: "hello@benine9.com",
-    href: "mailto:hello@benine9.com",
+    value: "b.nine9trading@gmail.com",
+    href: "mailto:b.nine9trading@gmail.com",
     external: false,
   },
   {
     icon: MessageCircle,
     label: "LINE Official",
-    value: "@benine9",
-    href: "https://line.me",
+    value: "เพิ่มเพื่อนทาง LINE",
+    href: "https://lin.ee/ufaoDYo",
     external: true,
   },
   {
     icon: FacebookIcon,
     label: "Facebook",
-    value: "facebook.com/benine9",
-    href: "https://facebook.com",
+    value: "b.nine9 trading",
+    href: "https://www.facebook.com/profile.php?id=61560984729693&locale=th_TH",
     external: true,
   },
   {
     icon: InstagramIcon,
     label: "Instagram",
-    value: "@benine9",
-    href: "https://instagram.com",
+    value: "@b.nine9trading",
+    href: "https://www.instagram.com/b.nine9trading/",
     external: true,
   },
   {
     icon: MapPin,
     label: "ที่อยู่",
-    value: "123 ถนนสุขุมวิท กรุงเทพฯ 10110",
+    value: "29/10 หมู่ที่ 7 ถนนท้ายบ้าน ตำบลท้ายบ้าน อำเภอเมืองสมุทรปราการ สมุทรปราการ 10280",
     href: "",
     external: false,
   },
@@ -157,7 +157,7 @@ export default function ContactPage() {
                   เวลาทำการ
                 </p>
                 <p className="mt-0.5 text-sm font-medium md:text-base" style={{ color: COLOR.onDark }}>
-                  จันทร์–เสาร์ 9:00–18:00 น.
+                  จันทร์–เสาร์ 8:00–18:00 น.
                 </p>
                 <p className="mt-0.5 text-xs" style={{ color: "#C7CBBB" }}>
                   ปิดวันอาทิตย์และวันหยุดนักขัตฤกษ์

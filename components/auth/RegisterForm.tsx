@@ -39,7 +39,7 @@ export default function RegisterForm() {
       return;
     }
 
-    alert("Register Success");
+    alert("สมัครสมาชิกสำเร็จ");
 
     router.push("/login");
   }
@@ -47,11 +47,11 @@ export default function RegisterForm() {
   return (
     <div className="w-full max-w-md rounded-3xl bg-white shadow-xl p-8">
       <h1 className="text-3xl font-bold text-[#0B3D2E]">
-        Create Account
+        สร้างบัญชีผู้ใช้
       </h1>
 
       <p className="mt-2 text-gray-500">
-        Join B-Long Trading
+        เข้าร่วมกับ B-Long Trading
       </p>
 
       <form
@@ -59,7 +59,7 @@ export default function RegisterForm() {
         className="mt-8 space-y-5"
       >
         <div>
-          <label>Full Name</label>
+          <label>ชื่อ-นามสกุล</label>
 
           <input
             type="text"
@@ -71,7 +71,7 @@ export default function RegisterForm() {
         </div>
 
         <div>
-          <label>Email</label>
+          <label>อีเมล</label>
 
           <input
             type="email"
@@ -83,7 +83,7 @@ export default function RegisterForm() {
         </div>
 
         <div>
-          <label>Password</label>
+          <label>รหัสผ่าน</label>
 
           <input
             type="password"
@@ -98,17 +98,17 @@ export default function RegisterForm() {
           disabled={loading}
           className="w-full rounded-xl bg-[#0B3D2E] py-3 text-white"
         >
-          {loading ? "Creating..." : "Create Account"}
+          {loading ? "กำลังสร้างบัญชี..." : "สร้างบัญชี"}
         </button>
       </form>
 
       <p className="mt-6 text-center text-sm">
-        Already have an account?{" "}
+        มีบัญชีอยู่แล้ว?{" "}
         <Link
           href="/login"
           className="font-semibold text-[#0B3D2E]"
         >
-          Login
+          เข้าสู่ระบบ
         </Link>
       </p>
     </div>

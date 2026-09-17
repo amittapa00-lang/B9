@@ -48,13 +48,13 @@ export default function LoginForm() {
 
   return (
     <div className="w-full max-w-md rounded-3xl bg-white p-8 shadow-xl">
-      <h1 className="text-3xl font-bold text-[#0B3D2E]">Welcome Back</h1>
+      <h1 className="text-3xl font-bold text-[#0B3D2E]">ยินดีต้อนรับกลับ</h1>
 
-      <p className="mt-2 text-gray-500">Login to B-Long Trading</p>
+      <p className="mt-2 text-gray-500">เข้าสู่ระบบ B-Long Trading</p>
 
       <form onSubmit={handleSubmit} className="mt-8 space-y-5">
         <div>
-          <label className="block text-sm font-medium">Email</label>
+          <label className="block text-sm font-medium">อีเมล</label>
 
           <input
             type="email"
@@ -67,7 +67,7 @@ export default function LoginForm() {
 
         <div>
           <div className="flex items-center justify-between">
-            <label className="block text-sm font-medium">Password</label>
+            <label className="block text-sm font-medium">รหัสผ่าน</label>
 
             <Link
               href="/forgot-password"
@@ -91,14 +91,14 @@ export default function LoginForm() {
           disabled={loading}
           className="w-full rounded-xl bg-[#0B3D2E] py-3 font-semibold text-white transition hover:bg-[#14503d] disabled:opacity-50"
         >
-          {loading ? "Signing In..." : "Login"}
+          {loading ? "กำลังเข้าสู่ระบบ..." : "เข้าสู่ระบบ"}
         </button>
       </form>
 
       <p className="mt-6 text-center text-sm text-gray-600">
-        Don&apos;t have an account?{" "}
+        ยังไม่มีบัญชี?{" "}
         <Link href="/register" className="font-semibold text-[#0B3D2E]">
-          Register
+          สมัครสมาชิก
         </Link>
       </p>
     </div>
